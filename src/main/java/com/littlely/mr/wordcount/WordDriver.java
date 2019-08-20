@@ -30,6 +30,9 @@ public class WordDriver {
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(IntWritable.class);
 
+        // 8 设置combiner类
+        job.setCombinerClass(WordcountCombiner.class);
+
         //5设置最终数据输出的key和value类型
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
