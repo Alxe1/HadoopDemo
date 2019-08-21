@@ -1,4 +1,4 @@
-# MAPREDUCE工作机制
+# MapReduce工作机制
 
 ## 1. MapTask工作机制
 
