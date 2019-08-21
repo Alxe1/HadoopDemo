@@ -2,7 +2,7 @@
 
 ## 1. MapTask工作机制
 
-![MapTask](https://github.com/Alxe1/HadoopDemo/tree/master/pic/maptask.png)
+![MapTask](pic/maptask.png)
 
 ​       （1）Read阶段：MapTask通过用户编写的RecordReader，从输入InputSplit中解析出一个个key/value。
 
@@ -30,7 +30,7 @@
 
 ## 2. ReduceTask工作机制
 
-![ReduceTask](https://github.com/Alxe1/HadoopDemo/tree/master/pic/reducetask.png)
+![ReduceTask](pic/reducetask.png)
 
 ​       （1）Copy阶段：ReduceTask从各个MapTask上远程拷贝一片数据，并针对某一片数据，如果其大小超过一定阈值，则写到磁盘上，否则直接放到内存中。
 
@@ -42,7 +42,7 @@
 
 ## 3. shuffle机制
 
-![shuffle](https://github.com/Alxe1/HadoopDemo/tree/master/pic/shuffle.png)
+![shuffle](pic/shuffle.png)
 
 # YARN资源调度器
 
@@ -50,26 +50,40 @@
 
 YARN主要由ResourceManager、NodeManager、ApplicationMaster和Container等组件构成
 
-![yarn架构](https://github.com/Alxe1/HadoopDemo/tree/master/pic/yarnstructure.png)
+![yarn架构](pic/yarnstructure.png)
 
 ## 2. YARN工作机制
 
-![yarn工作机制](https://github.com/Alxe1/HadoopDemo/tree/master/pic/yarntask.png)
+![yarn工作机制](pic/yarntask.png)
 
 （1）MR程序提交到客户端所在的节点。
+
 （2）YarnRunner向ResourceManager申请一个Application。
+
 （3）RM将该应用程序的资源路径返回给YarnRunner。
+
 （4）该程序将运行所需资源提交到HDFS上。
+
 （5）程序资源提交完毕后，申请运行mrAppMaster。
+
 （6）RM将用户的请求初始化成一个Task。
+
 （7）其中一个NodeManager领取到Task任务。
+
 （8）该NodeManager创建容器Container，并产生MRAppmaster。
+
 （9）Container从HDFS上拷贝资源到本地。
+
 （10）MRAppmaster向RM 申请运行MapTask资源。
+
 （11）RM将运行MapTask任务分配给另外两个NodeManager，另两个NodeManager分别领取任务并创建容器。
+
 （12）MR向两个接收到任务的NodeManager发送程序启动脚本，这两个NodeManager分别启动MapTask，MapTask对数据分区排序。
+
 （13）MrAppMaster等待所有MapTask运行完毕后，向RM申请容器，运行ReduceTask。
+
 （14）ReduceTask向MapTask获取相应分区的数据。
+
 （15）程序运行完毕后，MR会向RM申请注销自己。
 
 
